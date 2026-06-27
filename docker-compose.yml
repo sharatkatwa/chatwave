@@ -1,0 +1,37 @@
+services:
+  mongo:
+    image: mongo:8
+    container_name: mongo
+    ports:
+      - 9000:27017
+    volumes:
+      - chatwave-db:/data/db
+  
+  backend:
+    build: ./server
+    container_name: backend
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+    volumes:
+      - ./server:/app
+      - chatwave_node_modules:/app/node_modules
+    command: "npm run dev"
+    
+  frontend:
+    build: ./client
+    container_name: frontend
+    ports:
+      - 5173:5173
+    depends_on:
+      - backend
+    volumes:
+      - ./client:/app
+      - chatwave_node_modules_frontend:/app/node_modules
+    command: "npm run dev"
+    
+volumes:
+  chatwave-db:
+  chatwave_node_modules:
+  chatwave_node_modules_frontend:

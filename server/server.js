@@ -6,9 +6,8 @@ import logger from "./src/config/logger.js";
 const startServer = async () => {
   await connectDB();
   app.listen(env.PORT, () => {
-    logger.info({PORT: env.PORT}, "server is runnig on port ");
+    logger.info({ PORT: env.PORT }, "server is runnig on port ");
   });
 };
 
-
-startServer()
+startServer();

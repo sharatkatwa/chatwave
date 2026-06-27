@@ -9,6 +9,8 @@ const envSchema = z.object({
   PORT: z.coerce.number().default(3000),
   LOGGER_LEVEL: z.string().default(appConstants.LOGGER_LEVEL),
   NODE_ENV: z.string().default(appConstants.NODE_ENV),
+  ACCESS_SECRET: z.string(),
+  REFRESH_SECRET: z.string()
 });
 
 const parsed = envSchema.safeParse(process.env);
